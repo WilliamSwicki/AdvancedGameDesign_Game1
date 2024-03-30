@@ -1,0 +1,28 @@
+:: StoryTitle
+Bedlocked
+
+
+:: StoryData
+{
+  "ifid": "C8811866-A203-4701-930B-5DA619D4F901",
+  "format": "Harlowe",
+  "format-version": "3.3.8",
+  "start": "Story Intro",
+  "zoom": 1
+}
+
+
+:: Call For Help {"position":"1025,425","size":"100,100"}
+Hello!  Anyone!  I'm Stuck Here!
+
+
+:: Look Around {"position":"1025,250","size":"100,100"}
+It seems to be that I'm in a bedroom.
+
+
+:: Story Intro {"position":"875,350","size":"100,100"}
+Where Am I?  It's so dark and gloomy.
+
+Option One:  [[Look Around]]
+
+Option Two:  [[Call For Help]]
