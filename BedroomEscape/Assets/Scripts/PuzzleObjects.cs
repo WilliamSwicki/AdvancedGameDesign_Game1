@@ -7,6 +7,8 @@ public class PuzzleObjects : MonoBehaviour
     public bool turnOnObject;
     public bool turnOffObject;
     public bool turnOffSelf;
+    public bool givenItem;
+    public GameObject itemCard;
     public GameObject effectedObject;
     
     // Start is called before the first frame update
@@ -24,6 +26,10 @@ public class PuzzleObjects : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
+            if(givenItem)
+            {
+                GivenItem();
+            }
             if (turnOnObject)
             {
                 TurnOnObject();
@@ -59,5 +65,9 @@ public class PuzzleObjects : MonoBehaviour
         {
             effectedObject.GetComponent<Collider2D>().enabled = true;
         }
+    }
+    private void GivenItem()
+    {
+        Instantiate(itemCard);
     }
 }
