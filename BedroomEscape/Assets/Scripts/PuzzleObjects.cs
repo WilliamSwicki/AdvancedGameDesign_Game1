@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PuzzleObjects : MonoBehaviour
 {
-    bool turnOnObject;
-    bool turnOffObject;
-    bool turnOffSelf;
+    public bool turnOnObject;
+    public bool turnOffObject;
+    public bool turnOffSelf;
     public GameObject effectedObject;
     
     // Start is called before the first frame update
@@ -26,24 +26,38 @@ public class PuzzleObjects : MonoBehaviour
         {
             if (turnOnObject)
             {
-                effectedObject.SetActive(true);
-            }
-            else
-            {
-                effectedObject.SetActive(false);
+                TurnOnObject();
             }
             if(turnOffObject)
             {
-                effectedObject.GetComponent<Collider2D>().enabled = false;
-            }
-            else
-            {
-                effectedObject.GetComponent<Collider2D>().enabled = true;
+                TurnOffColider();
             }
             if(turnOffSelf)
             {
                 this.GetComponent<Collider2D>().enabled=false;
             }
+        }
+    }
+    private void TurnOnObject()
+    {
+        if (!effectedObject.activeSelf)
+        {
+            effectedObject.SetActive(true);
+        }
+        else
+        {
+            effectedObject.SetActive(false);
+        }
+    }
+    private void TurnOffColider()
+    {
+        if (effectedObject.GetComponent<Collider2D>().enabled == true)
+        {
+            effectedObject.GetComponent<Collider2D>().enabled = false;
+        }
+        else
+        {
+            effectedObject.GetComponent<Collider2D>().enabled = true;
         }
     }
 }
