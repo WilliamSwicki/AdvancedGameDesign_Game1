@@ -14,18 +14,19 @@ public class CodeDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-    private void OnMouseOver()
-    {
-
-        if (Input.GetMouseButtonDown(0))
+if (Input.GetMouseButtonDown(0))
         {
-            NumberCode.currentValue--;
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            if(hit.collider != null)
+            {
+NumberCode.currentValue--;
             if (NumberCode.currentValue < 0)
             {
                 NumberCode.currentValue = 9;
             }
+            }
+            
         }
     }
+    
 }

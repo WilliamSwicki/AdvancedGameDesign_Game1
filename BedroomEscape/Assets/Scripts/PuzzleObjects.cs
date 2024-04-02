@@ -5,10 +5,11 @@ using UnityEngine;
 public class PuzzleObjects : MonoBehaviour
 {
     public bool turnOnObject;
-    public bool turnOffObject;
+    public bool turnOffColider;
     public bool turnOffSelf;
     public bool givenItem;
     public GameObject itemCard;
+    public GameObject itemLocation;
     public GameObject effectedObject;
     
     // Start is called before the first frame update
@@ -20,12 +21,15 @@ public class PuzzleObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    private void OnMouseOver()
-    {
-        if(Input.GetMouseButtonDown(0))
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+Debug.Log(hit.collider.gameObject.name);
+        if (Input.GetMouseButtonDown(0))
         {
+            
+            
+            if (hit.collider != null)
+            {
+                
             if(givenItem)
             {
                 GivenItem();
@@ -34,7 +38,7 @@ public class PuzzleObjects : MonoBehaviour
             {
                 TurnOnObject();
             }
-            if(turnOffObject)
+            if(turnOffColider)
             {
                 TurnOffColider();
             }
@@ -42,8 +46,11 @@ public class PuzzleObjects : MonoBehaviour
             {
                 this.GetComponent<Collider2D>().enabled=false;
             }
+            }
+            
         }
     }
+ 
     private void TurnOnObject()
     {
         if (!effectedObject.activeSelf)
@@ -68,6 +75,6 @@ public class PuzzleObjects : MonoBehaviour
     }
     private void GivenItem()
     {
-        Instantiate(itemCard);
+        Instantiate(itemCard, itemLocation.transform);
     }
 }
