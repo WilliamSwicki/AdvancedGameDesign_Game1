@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CodeWindow : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class CodeWindow : MonoBehaviour
             }
             if (correctNum == code.Length)
             {
-                //change this to what is needed
+                SceneManager.LoadScene(3);
                 //this.gameObject.SetActive(false);
             }
         }

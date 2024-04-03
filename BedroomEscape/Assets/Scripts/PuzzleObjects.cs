@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PuzzleObjects : MonoBehaviour
 {
-    bool turnOnObject;
-    bool turnOffObject;
-    bool turnOffSelf;
+    public bool turnOnObject;
+    public bool turnOffColider;
+    public bool turnOffSelf;
+    public bool givenItem;
+    public GameObject itemCard;
+    public GameObject itemLocation;
     public GameObject effectedObject;
+    public TMP_Text feedBack;
+    public string feedBackText;
     
     // Start is called before the first frame update
     void Start()
@@ -18,32 +24,64 @@ public class PuzzleObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+            
+            
     }
     private void OnMouseOver()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
+            if (givenItem)
+            {
+                GivenItem();
+            }
             if (turnOnObject)
             {
-                effectedObject.SetActive(true);
+                TurnOnObject();
             }
-            else
+            if (turnOffColider)
             {
-                effectedObject.SetActive(false);
+                TurnOffColider();
             }
-            if(turnOffObject)
+            if (turnOffSelf)
             {
-                effectedObject.GetComponent<Collider2D>().enabled = false;
+                this.GetComponent<Collider2D>().enabled = false;
             }
-            else
-            {
-                effectedObject.GetComponent<Collider2D>().enabled = true;
-            }
-            if(turnOffSelf)
-            {
-                this.GetComponent<Collider2D>().enabled=false;
-            }
+            StartCoroutine(FeedbackText());
+            
         }
+    }
+    private IEnumerator FeedbackText()
+    {
+        feedBack.text = feedBackText;
+        yield return new WaitForSeconds(1);
+        feedBack.text = "";
+    }
+
+    private void TurnOnObject()
+    {
+        if (!effectedObject.activeSelf)
+        {
+            effectedObject.SetActive(true);
+        }
+        else
+        {
+            effectedObject.SetActive(false);
+        }
+    }
+    private void TurnOffColider()
+    {
+        if (effectedObject.GetComponent<Collider2D>().enabled == true)
+        {
+            effectedObject.GetComponent<Collider2D>().enabled = false;
+        }
+        else
+        {
+            effectedObject.GetComponent<Collider2D>().enabled = true;
+        }
+    }
+    private void GivenItem()
+    {
+        Instantiate(itemCard, itemLocation.transform);
     }
 }

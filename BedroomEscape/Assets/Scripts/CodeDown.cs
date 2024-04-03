@@ -18,14 +18,19 @@ public class CodeDown : MonoBehaviour
     }
     private void OnMouseOver()
     {
-
         if (Input.GetMouseButtonDown(0))
         {
-            NumberCode.currentValue--;
-            if (NumberCode.currentValue < 0)
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            if (hit.collider != null)
             {
-                NumberCode.currentValue = 9;
+                NumberCode.currentValue--;
+                if (NumberCode.currentValue < 0)
+                {
+                    NumberCode.currentValue = 9;
+                }
             }
+
         }
     }
+
 }
