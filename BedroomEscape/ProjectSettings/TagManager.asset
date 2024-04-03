@@ -7,6 +7,8 @@ TagManager:
   - Hand
   - Card
   - PuzzleObject
+  - Knife
+  - Key
   layers:
   - Default
   - TransparentFX
