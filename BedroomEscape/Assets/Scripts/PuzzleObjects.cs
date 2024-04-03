@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PuzzleObjects : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PuzzleObjects : MonoBehaviour
     public GameObject itemCard;
     public GameObject itemLocation;
     public GameObject effectedObject;
+    public TMP_Text feedBack;
+    public string feedBackText;
     
     // Start is called before the first frame update
     void Start()
@@ -21,16 +24,14 @@ public class PuzzleObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-Debug.Log(hit.collider.gameObject.name);
+            
+            
+    }
+    private void OnMouseOver()
+    {
         if (Input.GetMouseButtonDown(0))
         {
-            
-            
-            if (hit.collider != null)
-            {
-                
-            if(givenItem)
+            if (givenItem)
             {
                 GivenItem();
             }
@@ -38,19 +39,25 @@ Debug.Log(hit.collider.gameObject.name);
             {
                 TurnOnObject();
             }
-            if(turnOffColider)
+            if (turnOffColider)
             {
                 TurnOffColider();
             }
-            if(turnOffSelf)
+            if (turnOffSelf)
             {
-                this.GetComponent<Collider2D>().enabled=false;
+                this.GetComponent<Collider2D>().enabled = false;
             }
-            }
+            StartCoroutine(FeedbackText());
             
         }
     }
- 
+    private IEnumerator FeedbackText()
+    {
+        feedBack.text = feedBackText;
+        yield return new WaitForSeconds(1);
+        feedBack.text = "";
+    }
+
     private void TurnOnObject()
     {
         if (!effectedObject.activeSelf)

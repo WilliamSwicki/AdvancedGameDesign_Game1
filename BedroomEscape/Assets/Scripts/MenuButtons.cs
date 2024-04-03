@@ -34,4 +34,8 @@ public class MenuButtons : MonoBehaviour
             CreditsScreen.SetActive(false);
         }
     }
+    public void Close()
+    {
+        CreditsScreen.SetActive(false);
+    }
 }

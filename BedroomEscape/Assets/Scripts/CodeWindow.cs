@@ -26,7 +26,7 @@ public class CodeWindow : MonoBehaviour
             }
             if (correctNum == code.Length)
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(3);
                 //this.gameObject.SetActive(false);
             }
         }
